@@ -2,6 +2,7 @@
 
 function populateTemplate(s) {
 
+    // FIXME: check for es2015 compliance
     var src = `<pre>
 <h2>the WHY __CHEAP__ __ART__? manifesto</h2>
 
@@ -13,116 +14,170 @@ cant EAT it BUT it FEEDS you. __ART__ has to be __CHEAP__ &amp; available
 to __EVERYBODY__. It needs to be __EVERYWHERE__ because it is the INSIDE
 of the WORLD.
 
-__ART__ SOOTHES PAIN!
+__ART__ __SOOTHES__ PAIN!
 Art wakes up sleepers!
-__ART__ FIGHTS AGAINST WAR &amp; STUPIDITY.
+__ART__ FIGHTS AGAINST __WAR__ &amp; __STUPIDITY__.
 __ART__ SINGS HALLELUJA!
-__ART__ IS FOR KITCHENS!
-__ART__ IS LIKE GOOD BREAD!
+__ART__ IS FOR __KITCHENS__!
+__ART__ IS LIKE __GOOD__ __BREAD__!
 Art is like green trees!
 Art is like white clouds in blue sky!
 __ART__ IS __CHEAP__!
-HURRAH!
+__HURRAH__!
 
 <span id="cit">(from Bread &amp; Puppet Glover, Vermont 1984)</span>
 </pre>`;
 
-    var artReplacements = [
-        'ART',
-        'MUSIC',
-        'SEX',
-        'TEEVEE',
-        'MONEY',
-        'COCAINE',
-        'SPITTLE',
-        'PUS',
-        'PAIN',
-        'HUMILIATION'
+    var replacements = {
+        'art' : [
+            'ART',
+            'MUSIC',
+            'SEX',
+            'TEEVEE',
+            'MONEY',
+            'COCAINE',
+            'SPITTLE',
+            'PUS',
+            'PAIN',
+            'HUMILIATION'
+        ],
+        'cheap' : [
+            'CHEAP',
+            'FAST',
+            'GOOD',
+            'COLORED',
+            'LOUD',
+            'ERUDITE',
+            'FURRY',
+            'ODORIFEROUS',
+            'SIMPLE',
+            'PORNOGRAPHIC',
+            'GNARLY'
+        ],
+        'people' : [
+            'PEOPLE',
+            'PLANTS',
+            'LAW ENFORCEMENT',
+            'IMMIGRANTS'
+        ],
+        'thinking' : [
+            'THINKING',
+            'WHINING',
+            'WISHING',
+            'ASSERTING'
+        ],
+        'privilege' : [
+            'PRIVILEGE',
+            'WHITENESS',
+            'BENEFIT',
+            'DETRIMENT'
+        ],
+        'museums' : [
+            'MUSEUMS',
+            'PALACES',
+            'DOG HOUSES',
+            'SHACKS'
+        ],
+        'rich' : [
+            'RICH',
+            'POOR',
+            'CAPITALISTS',
+            'ANARCHISTS'
+        ],
+        'business' : [
+            'BUSINESS',
+            'HYGENE',
+            'SERVITUDE',
+            'MEDITATION'
+        ],
+        'food' : [
+            'FOOD',
+            'GRAVY',
+            'PLASTIC',
+            'RANCID'
+        ],
+        'everybody' : [
+            'EVERYBODY',
+            'HUMANS',
+            'ADOLESCENTS',
+            'MONKS'
+        ],
+        'everywhere' : [
+            'EVERYWHERE',
+            'IN ORBIT',
+            'WAITING',
+            'UNCORKED'
+        ],
+        'soothes' : [
+            'SOOTHES',
+            'HIDES',
+            'EASES',
+            'ENFLAMES'
+        ],
+        'war' : [
+            'WAR',
+            'RELIGION',
+            'RACE',
+            'RATIONALITY'
+        ],
+        'stupidity' : [
+            'STUPIDITY',
+            'EDUCATION',
+            'TOMFOOLERY',
+            'DECEIT'
+        ],
+        'kitchens' : [
+            'KITCHENS',
+            'BARROOMS',
+            'GYNASIUMS',
+            'CONSERVATORIES'
+        ],
+        'good' : [
+            'GOOD',
+            'PASSING',
+            'WRETCHED',
+            'CERTIFIED'
+        ],
+        'bread' : [
+            'BREAD',
+            'CUNNILINGUS',
+            'MEDITATION',
+            'WEED'
+        ],
+        'hurrah' : [
+            'HURRAH',
+            'OUCH',
+            'FUCKIN A',
+            'W00T'
+        ]
+    };
+
+    // where to put inText
+    var substitionKeys = [
+        'art',
+        'people',
+        'museums',
+        'rich',
+        'food',
+        'everybody',
+        'kitchens'
     ];
+    
+    var rnd = Math.floor( Math.random( substituionKeys.length ) );
+    var coin = Math.floor( Math.random( rnd ) );
+    if( coin > 0 ) {
+        // FIXME: start here
+        // shuffle array
+        // add uppercase inText to first rnd items
+        ;
+    }
 
-    var cheapReplacements = [
-        'CHEAP',
-        'FAST',
-        'GOOD',
-        'COLORED',
-        'LOUD',
-        'ERUDITE',
-        'FURRY',
-        'ODORIFEROUS',
-        'SIMPLE',
-        'PORNOGRAPHIC',
-        'GNARLY'
-    ];
-
-    var peopleReplacements = [
-        'PEOPLE',
-        'PLANTS',
-        'LAW ENFORCEMENT',
-        'IMMIGRANTS'
-    ];
-
-    var thinkingReplacements = [
-        'THINKING',
-        'WHINING',
-        'WISHING',
-        'ASSERTING'
-    ];
-
-    var privilegeReplacements = [
-        'PRIVILEGE',
-        'BURDEN',
-        'BENEFIT',
-        'DETRIMENT'
-    ];
-
-    var museumsReplacements = [
-        'MUSEUMS',
-        'PALACES',
-        'DOG HOUSES',
-        'SHACKS'
-    ];
-
-    var richReplacements = [
-        'RICH',
-        'POOR',
-        'CAPITALISTS',
-        'ANARCHISTS'
-    ];
-
-    var businessReplacements = [
-        'BUSINESS',
-        'HYGENE',
-        'SERVITUDE',
-        'MEDITATION'
-    ];
-
-    var foodReplacements = [
-        'FOOD',
-        'GRAVY',
-        'PLASTIC',
-        'RANCID'
-    ];
-
-    var everybodyReplacements = [
-        'EVERYBODY',
-        'IDIOTS',
-        'ADOLESCENTS',
-        'MONKS'
-    ];
-
-    everywhereReplacements = [
-        'EVERYWHERE',
-        'IN ORBIT',
-        'TRANSCENDENT',
-        'MUNDANE'
-    ];
-
-
-
-    // FIXME
-    // not all substitutions are made each time, some are skipped
-    // need a data structure to determine which array[s]
-    //   get inText added to them
+    // get replacement keys into array
+    // for each key flip a coin (figuratively)
+    // to decide if substitions will be done with given key
+    // if so, select replacement
+    // if not, replacement is replacements[<key>][0]
+    // update template
 
     return src;
 }
@@ -133,8 +188,13 @@ function genManifesto() {
     var msg = "genManifesto() called " + now.toISOString();
     console.log( msg );
 
-    // FIXME: this comes from inText on form
-    var inText = "nothing";
+    // FIXME: do some simple regexp testing
+    // only alphanumerics no spaces
+    var inText = document.getElementById("inText").value;
+    
+    // DEBUG
+    console.log( 'inText: ' + inText );
+
     gm = populateTemplate( inText );
     document.getElementById("outText").innerHTML = gm;
 }
