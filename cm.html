@@ -2,18 +2,20 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>cheap manifestos</title>
+        <title>cheap manifesto</title>
     </head>
 
     <body>
-        <h1>cheap manifestos</h1>
-        <p>for itch.io manifesto jam (and also an homage to
-            <a href="http://breadandpuppet.org/">bread &amp; puppets</a>
-        who came up with the original all those years ago).</p>
+        <h1>cheap manifesto</h1>
 
         <form action="about:blank" id="cheapForm">
-            <label for="inText">(optional) hint:</label>
+            <label for="inText">inText:</label>
             <input type="text" name="inText" id="inText" size="8" /><br />
+            <span id="hint">(plural/compound nouns best)</span><br />
+            <!--
+                FIXME: would like to have a slider
+                to control degree of "randomness"
+            -->
             <button type="button" id="genButton">generate</button>
         </form>
 
