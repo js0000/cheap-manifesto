@@ -22,9 +22,9 @@ function knuthShuffle(a) {
 function populateTemplate(userText) {
 
     // FIXME: check for es2015 compliance
-    var src = `<pre>
+    var src = `
 <h2>the WHY __CHEAP__ __ART__? manifesto</h2>
-
+<pre>
 __PEOPLE__ have been __THINKING__ too long that __ART__ is a __PRIVILEGE__ of the
 __MUSEUMS__ &amp; the __RICH__. __ART__ IS NOT __BUSINESS__!
 
