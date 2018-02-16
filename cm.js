@@ -3,15 +3,10 @@
 
 function knuthShuffle(a) {
     var c = a.length;
-    // While there are elements in the array
     while (c > 0) {
-        // Pick a random index
         var idx = Math.floor( Math.random() * c );
-
-        // Decrease counter by 1
         c--;
 
-        // And swap the last element with it
         var tmp = a[c];
         a[c] = a[idx];
         a[idx] = tmp;
@@ -19,248 +14,334 @@ function knuthShuffle(a) {
     return a;
 }
 
-function populateTemplate(userText) {
+function populateTemplate(uT, r, t) {
 
     // FIXME: check for es2015 compliance
-    var src = `
+
+    var templateSrc = `
 <h2>the WHY __CHEAP__ __ART__? manifesto</h2>
-<pre>
-__PEOPLE__ have been __THINKING__ too long that __ART__ is a __PRIVILEGE__ of the
-__MUSEUMS__ &amp; the __RICH__. __ART__ IS NOT __BUSINESS__!
 
-It does not belong to banks &amp; fancy investors __ART__ IS __FOOD__. You
-cant EAT it BUT it FEEDS you. __ART__ has to be __CHEAP__ &amp; available
-to __EVERYBODY__. It needs to be __EVERYWHERE__ because it is the INSIDE
-of the WORLD.
+<p>__PEOPLE__ have been __THINKING__ too long that __ART__ is a
+__PRIVILEGE__ of the __MUSEUMS__ &amp; the __RICH__. __ART__ IS
+NOT __BUSINESS__!</p>
 
-__ART__ __SOOTHES__ PAIN!
-Art wakes up sleepers!
-__ART__ FIGHTS AGAINST __WAR__ &amp; __STUPIDITY__.
-__ART__ SINGS HALLELUJA!
-__ART__ IS FOR __KITCHENS__!
-__ART__ IS LIKE __GOOD__ __BREAD__!
-Art is like green trees!
-Art is like white clouds in blue sky!
-__ART__ IS __CHEAP__!
-__HURRAH__!
+<p>It does not belong to banks &amp; fancy investors __ART__ IS
+__FOOD__. You cant EAT it __BUT__ it __FEEDS__ you. __ART__ has to
+be __CHEAP__ &amp; available to __EVERYBODY__. It needs to be
+__EVERYWHERE__ because it is the __INSIDE__ of the __WORLD__.</p>
 
-<span id="cit">(from Bread &amp; Puppet Glover, Vermont 1984)</span>
-</pre>`;
+<p>__ART__ __SOOTHES__ PAIN!<br />
+Art wakes up sleepers!<br />
+__ART__ FIGHTS __AGAINST__ __WAR__ &amp; __STUPIDITY__.<br />
+__ART__ SINGS __HALLELUJA__!<br />
+__ART__ IS FOR __KITCHENS__!<br />
+__ART__ IS LIKE __GOOD__ __BREAD__!<br />
+Art is like green trees!<br />
+Art is like white clouds in blue sky!<br />
+__ART__ IS __CHEAP__!<br />
+__HURRAH__!<br />
+</p>
 
+<p id="manifestoFooter">derived from: <cite>Bread &amp; Puppet Glover, Vermont
+1984</cite><br><span id="generatedDate">__TIMESTAMP__</span></p>`;
+
+    // four element arrays like
+    // [ original, similar, opposite, weird ]
     var replacements = {
         'art' : [
             'ART',
             'MUSIC',
             'POETRY',
-            'SEX',
-            'WALKING',
+            'DANCE',
             'MEDITATION',
             'DISCIPLINE',
+            'WALKING',
+            'PATIENCE',
             'HUMILIATION',
-            'ENCHANTMENT',
-            'DISCUSSION',
-            'TEEVEE',
-            'TECHNOLOGY',
-            'MONEY',
             'COCAINE',
+            'TEEVEE',
+            'MONEY',
+            'PORNOGRAPHY',
+            'JOKES',
             'SWEAT',
-            'SPITTLE'
+            'DAYDREAMS'
         ],
         'cheap' : [
             'CHEAP',
+            'SIMPLE',
             'FAST',
             'GOOD',
             'LOUD',
-            'ERUDITE',
-            'FURRY',
-            'SIMPLE',
             'PORNOGRAPHIC',
+            'ERUDITE',
+            'FURRY'
         ],
         'people' : [
             'PEOPLE',
-            'PLANTS',
-            'LAW ENFORCEMENT',
-            'IMMIGRANTS'
+            'CIVILIZATIONS',
+            'BASTARDS',
+            'PLANTS'
         ],
         'thinking' : [
             'THINKING',
+            'ASSERTING',
             'WHINING',
-            'WISHING',
-            'ASSERTING'
+            'FARTING'
         ],
         'privilege' : [
             'PRIVILEGE',
-            'SMELL',
             'BENEFIT',
-            'BURDEN'
+            'PENALTY',
+            'REMNANT'
         ],
         'museums' : [
             'MUSEUMS',
             'PALACES',
             'OUTHOUSES',
-            'SHACKS'
+            'IMAGINATION'
         ],
         'rich' : [
             'RICH',
-            'POOR',
             'CAPITALISTS',
+            'POOR',
             'ANARCHISTS'
         ],
         'business' : [
             'BUSINESS',
-            'HYGENE',
+            'LEISURE',
             'SERVITUDE',
-            'LEISURE'
+            'HYGENE'
         ],
         'food' : [
             'FOOD',
-            'GRAVY',
-            'PLASTIC',
-            'RANCID'
+            'WINE',
+            'RANCID',
+            'PLASTIC'
+        ],
+        'but' : [
+            'BUT',
+            'OR',
+            'NOT',
+            'AND'
+        ],
+        'feeds' : [
+            'FEEDS',
+            'NOURISHES',
+            'SICKENS',
+            'ANNOINTS'
         ],
         'everybody' : [
             'EVERYBODY',
             'HUMANS',
-            'ADOLESCENTS',
+            'NO ONE',
             'MONKS'
         ],
         'everywhere' : [
             'EVERYWHERE',
-            'IN ORBIT',
-            'WAITING',
-            'UNCORKED'
+            'WIDESPREAD',
+            'ABSENT',
+            'IN ORBIT'
+        ],
+        'inside' : [
+            'INSIDE',
+            'WITHIN',
+            'OUTSIDE',
+            'CANVAS'
+        ],
+        'world' : [
+            'WORLD',
+            'PLANET',
+            'SKY',
+            'MIND'
         ],
         'soothes' : [
             'SOOTHES',
-            'HIDES',
             'EASES',
-            'ENFLAMES'
+            'ENHANCES',
+            'FOLLOWS'
+        ],
+        'against' : [
+            'AGAINST',
+            'TO CRUSH',
+            'FOR',
+            'ANCIENT'
         ],
         'war' : [
             'WAR',
             'RELIGION',
-            'RACE',
-            'RATIONALITY'
+            'RATIONALITY',
+            'GLUTEN'
         ],
         'stupidity' : [
             'STUPIDITY',
+            'DECEIT',
             'EDUCATION',
-            'TOMFOOLERY',
-            'DECEIT'
+            'LO-MEIN'
+        ],
+        'halleluja' : [
+            'HALLELUJA',
+            'AMEN',
+            'BULLSHIT',
+            'YO'
         ],
         'kitchens' : [
             'KITCHENS',
-            'BARROOMS',
-            'GYNASIUMS',
-            'CONSERVATORIES'
+            'PORCHES',
+            'OUT HOUSES',
+            'ILLNESS'
         ],
         'good' : [
             'GOOD',
-            'PASSING',
+            'AGED',
             'WRETCHED',
             'CERTIFIED'
         ],
         'bread' : [
             'BREAD',
-            'CUNNILINGUS',
-            'MEDITATION',
-            'WEED'
+            'RICE',
+            'DONUTS',
+            'CUNNILINGUS'
         ],
         'hurrah' : [
             'HURRAH',
-            'OUCH',
             'FUCKIN A',
+            'OUCH',
             'w00t'
+        ],
+        'timestamp' : [
+            t
         ]
     };
 
-    // where to put inText
-    var substitutionKeys = [
+    // append userText to selected replacement arrays
+    // use randomness to increase chances of userText
+    var userTextReplacements = [
         'art',
-        'people',
+        'business',
         'museums',
-        'rich',
         'food',
         'everybody',
         'kitchens'
     ];
 
-    // append userText to selected replacement arrays
-    var i, sa, rnd, coin;
-    if( userText.length > 0 ) {
-        rnd = Math.floor( Math.random() * substitutionKeys.length );
-        coin = Math.floor( Math.random() * rnd );
+    var i, sa, coin;
+    if( uT.length > 0 ) {
+        coin = Math.floor( Math.random()* userTextReplacements.length );
+
+        // DEBUG
+        console.log( 'coin: ' + coin );
         if( coin > 0 ) {
-            sa = knuthShuffle( substitutionKeys );
-            for( i = 0; i < rnd; i++ ) {
-                k = sa[i];
-                replacements[k].push( userText );
-    
+            sa = knuthShuffle( userTextReplacements );
+            // randomness
+            var intR = parseInt( r );
+            var numberReplacements = intR + 1;
+
+            // DEBUG
+            console.log( 'numberReplacements: ' + numberReplacements );
+
+            for( i = 0; i < numberReplacements; i++ ) {
+                var k = sa[i];
+
                 // DEBUG
-                console.log( 'adding ' + userText + ' to ' + k );
+                console.log( 'k: ' + k );
+
+                for( var j = 0; j < coin; j++ ) {
+                    replacements[k].push( uT );
+                }
+
+                // DEBUG
+                var debugMsg = 'adding ' + uT + ' to ' + k;
+                console.log( debugMsg );
             }
         }
     }
 
+    // do the replacements in the templateSrc
     var pattern, tmpSrc;
     var replacementKeys = Object.keys( replacements );
     for( i = 0; i < replacementKeys.length; i++ ) {
-        rawToken = replacementKeys[i];
-        token = '__' + rawToken.toUpperCase() + '__';
+        var rawToken = replacementKeys[i];
+        var token = '__' + rawToken.toUpperCase() + '__';
         // default is original
-        replacement = replacements[rawToken][0];
-        // hardcoded one in four
-        coin = Math.floor( Math.random() * 4 );
+        var replacement = replacements[rawToken][0];
+        var sides = r * 2;
+        coin = Math.floor( Math.random() * sides );
         if( coin > 0 ) {
             sa = knuthShuffle( replacements[rawToken] );
-            rnd = Math.floor( Math.random() * replacements[rawToken].length );
-            replacement = sa[rnd];
+            var idx = Math.floor( Math.random() * replacements[rawToken].length );
+            replacement = sa[idx];
+
+            // DEBUG
+            console.log( token + ' replaced with ' + replacement );
         }
         // update template
         pattern = new RegExp( token, 'gm' );
-        tmpSrc = src.replace( pattern, replacement );
-        src = tmpSrc;
+        tmpSrc = templateSrc.replace( pattern, replacement );
+        templateSrc = tmpSrc;
     }
 
-    return src;
+    return templateSrc;
+}
+
+function clearPage() {
+    document.getElementById("userText").value = '';
+    document.getElementById("outText").innerText = '';
+    document.getElementById("errorText").innerText = '';
+}
+
+function returnError( eM ) {
+    clearPage();
+    document.getElementById("errorText").innerText = eM;
 }
 
 function genManifesto() {
-    // DEBUG
-    now = new Date();
-    var msg = "genManifesto() called " + now.toISOString();
-    console.log( msg );
-
-    var rawInText = document.getElementById("inText").value;
-    var inText = '';
+    var rawUserText = document.getElementById("userText").value;
     var singleWordPattern = new RegExp( '^\\w+$' );
-    var ok = singleWordPattern.test( rawInText );
-    if( ! ok ) {
-        // FIXME: return error
-        var error = 'invalid inText, must be ONLY alphanumerics: ' + rawInText;
-        
+    var singleWord = singleWordPattern.test( rawUserText );
+    var spaceOnlyPattern = new RegExp( '^\\s*$' );
+    var spaceOnly = spaceOnlyPattern.test( rawUserText );
+
+    // DEBUG
+    console.log( 'rawUserText: ' + rawUserText );
+    console.log( 'singleWordPattern: ' + singleWordPattern );
+    console.log( 'spaceOnly: ' + spaceOnly );
+    if( singleWord || spaceOnly ) {
+        var userText = rawUserText.toUpperCase();
+        var randomness = document.getElementById("randomness").value;
+
         // DEBUG
-        console.log( error );
+        console.log( 'randomness: ' + randomness );
+
+        var now = new Date();
+        var timestamp = "generated: " + now.toISOString();
+        var oT = populateTemplate( userText, randomness, timestamp );
+        document.getElementById("outText").innerHTML = oT;
     }
     else {
-       inText = rawInText.toUpperCase();
+        var errorMsg = 'invalid userText, must be ONLY alphanumerics: "' + rawUserText + '"';
+        returnError( errorMsg );
+
+        // DEBUG
+        console.log( errorMsg );
     }
-    gm = populateTemplate( inText );
-    document.getElementById("outText").innerHTML = gm;
 }
 
 document.getElementById("genButton").onclick = genManifesto;
 
-function nullSubmit() {
-    // DEBUG
-    now = new Date();
-    var msg = "nullSubmit() called " + now.toISOString();
-    console.log( msg );
+function displayRandomness() {
+    var r = document.getElementById("randomness").value;
+    document.getElementById("rLevel").innerText = r;
+}
 
+document.getElementById("randomness").onchange = displayRandomness;
+
+function nullSubmit() {
     return false;
 }
 
 document.getElementById("cheapForm").onsubmit = nullSubmit;
+clearPage();
+displayRandomness();
 
 // DEBUG
 alert( "cm.js loaded ok" );

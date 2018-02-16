@@ -2,26 +2,34 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <link href="https://fonts.googleapis.com/css?family=Corben:700" rel="stylesheet"> 
-        <link href="cm.css" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css?family=Corben:700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=VM323" rel="stylesheet">
+        <link href="cm.css" rel="stylesheet">
         <title>cheap manifesto</title>
     </head>
 
     <body>
-        <h1>cheap manifesto</h1>
-
-        <form action="about:blank" id="cheapForm">
-            <label for="inText">inText:</label>
-            <input type="text" name="inText" id="inText" size="8" /><br />
-            <span id="hint">(plural/compound nouns best)</span><br />
-            <!--
-                FIXME: would like to have a slider
-                to control degree of "randomness"
-            -->
-            <button type="button" id="genButton">generate</button>
-        </form>
-
-        <div id="outText"></div>
+        <div id="grid">
+            <div class="areaA">
+                <h1>cheap manifesto</h1>
+            </div>
+            <form action="about:blank" id="cheapForm">
+                <div class="areaB">
+                    <label for="userText">(plural/compound nouns best) userText:</label>
+                    <input id="userText" type="text" name="uT" />
+                    <span id="errorText"></span>
+                </div>
+                <div class="areaC">
+                    <label for="randomness">randomness:</label>
+                    <input id="randomness" type="range" min="0" max="4" name="r" />
+                    <span id="rLevel"></span>
+                </div>
+                <div class="areaD">
+                    <button id="genButton" type="button">generate</button>
+                </div>
+            </form>
+            <div id="outText" class="areaA"></div>
+        </div>
         <script src="cm.js"></script>
     </body>
 </html>

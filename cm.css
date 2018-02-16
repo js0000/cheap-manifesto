@@ -1,5 +1,23 @@
 /* cm.css */
 
-h2, pre {
+body, input {
+    font-family: 'VM323', monospace;
+    font-size: small;
+}
+
+div#outText {
     font-family: 'Corben', cursive;
 }
+
+p#manifestoFooter {
+    font-size: x-small;
+}
+
+span#errorText {
+    color: red;
+}
+
+span#generatedDate, span#rLevel {
+    color: grey;
+}
+
