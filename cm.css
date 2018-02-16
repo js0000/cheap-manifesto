@@ -1,23 +1,103 @@
 /* cm.css */
 
-body, input {
-    font-family: 'VM323', monospace;
-    font-size: small;
+body, input, button {
+    font-family: Georgia, Times, serif;
+    font-size: medium;
 }
 
-div#outText {
+input {
+    vertical-align: middle;
+    padding: 4px;
+}
+
+button {
+    padding: 5px;
+    border: 1px solid black;
+    background: transparent;
+}
+
+button:hover {
+    background: #ccc;
+}
+
+button:active {
+    border-color: red;
+    background: red;
+    color: white;
+}
+
+h1 {
+    font-family: 'Press Start 2P', cursive;
+}
+
+#manifesto {
     font-family: 'Corben', cursive;
 }
 
-p#manifestoFooter {
+#manifestoFooter {
     font-size: x-small;
 }
 
-span#errorText {
+.eText {
+    font-family: 'Press Start 2P', cursive;
+    font-size: xx-small;
     color: red;
 }
 
-span#generatedDate, span#rLevel {
+.hText, #generatedDate, #crDisplay {
     color: grey;
 }
 
+#gContainer {
+    display: grid;
+    grid-template-columns: 1fr 512px 1fr;
+    grid-template-rows: auto;
+    grid-gap: 16px;
+}
+
+.gHeader {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    background: #fee;
+}
+
+.gChangeRange {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.gGenerate {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.gUserText {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.gHeader, .gChangeRange, .gGenerate, .gUserText {
+    text-align: center;
+}
+.gManifesto {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+.gFooter {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    background: #dfd;
+}

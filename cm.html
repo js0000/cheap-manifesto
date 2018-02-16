@@ -3,32 +3,38 @@
     <head>
         <meta charset="utf-8">
         <link href="https://fonts.googleapis.com/css?family=Corben:700" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=VM323" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
         <link href="cm.css" rel="stylesheet">
         <title>cheap manifesto</title>
     </head>
 
     <body>
-        <div id="grid">
-            <div class="areaA">
+        <div id="gContainer">
+            <div class="gHeader">
                 <h1>cheap manifesto</h1>
             </div>
-            <form action="about:blank" id="cheapForm">
-                <div class="areaB">
-                    <label for="userText">(plural/compound nouns best) userText:</label>
-                    <input id="userText" type="text" name="uT" />
-                    <span id="errorText"></span>
-                </div>
-                <div class="areaC">
-                    <label for="randomness">randomness:</label>
-                    <input id="randomness" type="range" min="0" max="4" name="r" />
-                    <span id="rLevel"></span>
-                </div>
-                <div class="areaD">
-                    <button id="genButton" type="button">generate</button>
-                </div>
-            </form>
-            <div id="outText" class="areaA"></div>
+            <div class="gChangeRange">
+                <form action="about:blank" id="fChangeRange">
+                    <label for="changeRate">changeRate:</label>
+                    <input id="changeRate" type="range" min="0" max="4" name="cR">
+                    <span id="crDisplay"></span>
+                </form>
+            </div>
+            <div class="gGenerate">
+                <button id="bGenerate" type="button">generate</button>
+            </div>
+            <div class="gUserText">
+                <form action="about:blank" id="fUserText">
+                    <label for="userText">userText:</label>
+                    <input id="userText" type="text" name="uT"><br>
+                    <span class="hText">
+                        (plural/compound nouns best)
+                    </span><br>
+                    <span id="errorText" class="eText"></span>
+                </form>
+            </div>
+            <div id="manifesto" class="gManifesto"></div>
+            <div class="gFooter"><p>&nbsp;</p></div>
         </div>
         <script src="cm.js"></script>
     </body>

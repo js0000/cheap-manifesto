@@ -14,7 +14,7 @@ function knuthShuffle(a) {
     return a;
 }
 
-function populateTemplate(uT, r, t) {
+function populateTemplate(uT, cR, t) {
 
     // FIXME: check for es2015 compliance
 
@@ -42,8 +42,8 @@ __ART__ IS __CHEAP__!<br />
 __HURRAH__!<br />
 </p>
 
-<p id="manifestoFooter">derived from: <cite>Bread &amp; Puppet Glover, Vermont
-1984</cite><br><span id="generatedDate">__TIMESTAMP__</span></p>`;
+<p id="manifestoFooter">derived from: <a href="http://breadandpuppet.org/" target="_blank">Bread &amp; Puppet</a>
+    Glover, Vermont, 1984<br><span id="generatedDate">__TIMESTAMP__</span></p>`;
 
     // four element arrays like
     // [ original, similar, opposite, weird ]
@@ -62,7 +62,7 @@ __HURRAH__!<br />
             'TEEVEE',
             'MONEY',
             'PORNOGRAPHY',
-            'JOKES',
+            'JOKING',
             'SWEAT',
             'DAYDREAMS'
         ],
@@ -86,7 +86,7 @@ __HURRAH__!<br />
             'THINKING',
             'ASSERTING',
             'WHINING',
-            'FARTING'
+            'BULLSHITTING'
         ],
         'privilege' : [
             'PRIVILEGE',
@@ -214,7 +214,7 @@ __HURRAH__!<br />
     };
 
     // append userText to selected replacement arrays
-    // use randomness to increase chances of userText
+    // use changeRate to increase chances of userText
     var userTextReplacements = [
         'art',
         'business',
@@ -227,31 +227,16 @@ __HURRAH__!<br />
     var i, sa, coin;
     if( uT.length > 0 ) {
         coin = Math.floor( Math.random()* userTextReplacements.length );
-
-        // DEBUG
-        console.log( 'coin: ' + coin );
         if( coin > 0 ) {
             sa = knuthShuffle( userTextReplacements );
-            // randomness
-            var intR = parseInt( r );
-            var numberReplacements = intR + 1;
-
-            // DEBUG
-            console.log( 'numberReplacements: ' + numberReplacements );
-
+            // changeRate
+            var intCR = parseInt( cR );
+            var numberReplacements = intCR + 1;
             for( i = 0; i < numberReplacements; i++ ) {
                 var k = sa[i];
-
-                // DEBUG
-                console.log( 'k: ' + k );
-
                 for( var j = 0; j < coin; j++ ) {
                     replacements[k].push( uT );
                 }
-
-                // DEBUG
-                var debugMsg = 'adding ' + uT + ' to ' + k;
-                console.log( debugMsg );
             }
         }
     }
@@ -264,15 +249,12 @@ __HURRAH__!<br />
         var token = '__' + rawToken.toUpperCase() + '__';
         // default is original
         var replacement = replacements[rawToken][0];
-        var sides = r * 2;
+        var sides = cR * 2;
         coin = Math.floor( Math.random() * sides );
         if( coin > 0 ) {
             sa = knuthShuffle( replacements[rawToken] );
             var idx = Math.floor( Math.random() * replacements[rawToken].length );
             replacement = sa[idx];
-
-            // DEBUG
-            console.log( token + ' replaced with ' + replacement );
         }
         // update template
         pattern = new RegExp( token, 'gm' );
@@ -284,64 +266,54 @@ __HURRAH__!<br />
 }
 
 function clearPage() {
-    document.getElementById("userText").value = '';
-    document.getElementById("outText").innerText = '';
+    document.getElementById("manifesto").innerText = '';
     document.getElementById("errorText").innerText = '';
+}
+
+function resetPage() {
+    clearPage();
+    document.getElementById("userText").value = '';
+    document.getElementById("changeRate").value = 2;
 }
 
 function returnError( eM ) {
     clearPage();
-    document.getElementById("errorText").innerText = eM;
+    document.getElementById("errorText").innerHTML = eM;
 }
 
 function genManifesto() {
+    clearPage();
     var rawUserText = document.getElementById("userText").value;
     var singleWordPattern = new RegExp( '^\\w+$' );
     var singleWord = singleWordPattern.test( rawUserText );
     var spaceOnlyPattern = new RegExp( '^\\s*$' );
     var spaceOnly = spaceOnlyPattern.test( rawUserText );
-
-    // DEBUG
-    console.log( 'rawUserText: ' + rawUserText );
-    console.log( 'singleWordPattern: ' + singleWordPattern );
-    console.log( 'spaceOnly: ' + spaceOnly );
     if( singleWord || spaceOnly ) {
-        var userText = rawUserText.toUpperCase();
-        var randomness = document.getElementById("randomness").value;
-
-        // DEBUG
-        console.log( 'randomness: ' + randomness );
-
+        var userText = '';
+        if( ! spaceOnly ) {
+            userText= rawUserText.toUpperCase();
+        }
+        var changeRate = document.getElementById("changeRate").value;
         var now = new Date();
         var timestamp = "generated: " + now.toISOString();
-        var oT = populateTemplate( userText, randomness, timestamp );
-        document.getElementById("outText").innerHTML = oT;
+        var m = populateTemplate( userText, changeRate, timestamp );
+        document.getElementById("manifesto").innerHTML = m;
     }
     else {
-        var errorMsg = 'invalid userText, must be ONLY alphanumerics: "' + rawUserText + '"';
+        var errorMsg = 'invalid userText, ONLY alphanumerics allowed<br>"' + rawUserText + '"';
         returnError( errorMsg );
-
-        // DEBUG
-        console.log( errorMsg );
     }
 }
+document.getElementById("bGenerate").onclick = genManifesto;
 
-document.getElementById("genButton").onclick = genManifesto;
-
-function displayRandomness() {
-    var r = document.getElementById("randomness").value;
-    document.getElementById("rLevel").innerText = r;
+function displaychangeRate() {
+    var cR = document.getElementById("changeRate").value;
+    document.getElementById("crDisplay").innerText = cR;
 }
+document.getElementById("changeRate").onchange = displaychangeRate;
 
-document.getElementById("randomness").onchange = displayRandomness;
+function nullSubmit() { return false; }
+document.getElementById("fUserText").onsubmit = nullSubmit;
 
-function nullSubmit() {
-    return false;
-}
-
-document.getElementById("cheapForm").onsubmit = nullSubmit;
-clearPage();
-displayRandomness();
-
-// DEBUG
-alert( "cm.js loaded ok" );
+resetPage();
+displaychangeRate();
