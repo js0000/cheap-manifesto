@@ -17,13 +17,13 @@ button {
 }
 
 button:hover {
-    background: #ccc;
+    background: #fee;
 }
 
 button:active {
-    border-color: red;
-    background: red;
-    color: white;
+    font-weight: bold;
+    background: #ccf;
+    color: #800;
 }
 
 h1 {
@@ -68,7 +68,7 @@ h1 {
     grid-row-start: 2;
     grid-row-end: 3;
     align-self: center;
-    background: #ccf;
+    background: #dfd;
 }
 
 .gGenerate {
@@ -77,7 +77,7 @@ h1 {
     grid-row-start: 2;
     grid-row-end: 3;
     align-self: center;
-    background: #ccf;
+    background: #dfd;
 }
 
 .gUserText {
@@ -86,7 +86,7 @@ h1 {
     grid-row-start: 2;
     grid-row-end: 3;
     align-self: center;
-    background: #ccf;
+    background: #dfd;
 }
 
 .gHeader, .gChangeRange, .gGenerate, .gUserText {
@@ -104,5 +104,5 @@ h1 {
     grid-column-end: 4;
     grid-row-start: 4;
     grid-row-end: 5;
-    background: #dfd;
+    background: #ccf;
 }
