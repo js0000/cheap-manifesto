@@ -39,8 +39,7 @@ h1 {
 }
 
 .eText {
-    font-family: 'Press Start 2P', cursive;
-    font-size: xx-small;
+    font-size: x-small;
     color: red;
 }
 
@@ -68,6 +67,8 @@ h1 {
     grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 3;
+    align-self: center;
+    background: #ccf;
 }
 
 .gGenerate {
@@ -75,6 +76,8 @@ h1 {
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
+    align-self: center;
+    background: #ccf;
 }
 
 .gUserText {
@@ -82,6 +85,8 @@ h1 {
     grid-column-end: 4;
     grid-row-start: 2;
     grid-row-end: 3;
+    align-self: center;
+    background: #ccf;
 }
 
 .gHeader, .gChangeRange, .gGenerate, .gUserText {
