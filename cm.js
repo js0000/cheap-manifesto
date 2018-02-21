@@ -43,7 +43,7 @@ __HURRAH__!<br />
 </p>
 
 <p id="manifestoFooter">
-    derived from:
+    inspiration:
     <a href="http://breadandpuppet.org/" target="_blank">Bread &amp; Puppet</a>
     Glover, Vermont, 1984<br>
     <span id="generatedDate">__TIMESTAMP__</span>

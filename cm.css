@@ -10,13 +10,15 @@ body {
 
 input, button {
     vertical-align: middle;
-    padding: 4px;
+    margin: 8px;
+    padding: 4px; 
     font-size: medium;
 }
 
 button {
     border: 1px solid black;
     background: transparent;
+    font-variant: small-caps;
 }
 
 button:hover {
@@ -33,6 +35,10 @@ h1 {
     font-family: 'Press Start 2P', cursive;
 }
 
+label {
+    font-weight: bold;
+}
+
 #gManifesto {
     font-family: 'Corben', cursive;
     margin-top: -64px;
@@ -43,11 +49,12 @@ h1 {
 }
 
 .eText {
-    font-size: x-small;
+    font-variant: small-caps;
+    font-size: small;
     color: red;
 }
 
-.hText, #generatedDate, #crDisplay {
+#generatedDate {
     color: grey;
 }
 
