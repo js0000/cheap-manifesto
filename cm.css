@@ -2,36 +2,40 @@
 
 body, input, button {
     font-family: Georgia, Times, serif;
+}
+
+body {
+    background-color: #ffe;
+}
+
+input, button {
+    vertical-align: middle;
+    padding: 4px;
     font-size: medium;
 }
 
-input {
-    vertical-align: middle;
-    padding: 4px;
-}
-
 button {
-    padding: 5px;
     border: 1px solid black;
     background: transparent;
 }
 
 button:hover {
-    background: #fee;
+    background: #ccc;
 }
 
 button:active {
     font-weight: bold;
-    background: #ccf;
-    color: #800;
+    background: #000;
+    color: #fff;
 }
 
 h1 {
     font-family: 'Press Start 2P', cursive;
 }
 
-#manifesto {
+#gManifesto {
     font-family: 'Corben', cursive;
+    margin-top: -64px;
 }
 
 #manifestoFooter {
@@ -49,60 +53,59 @@ h1 {
 
 #gContainer {
     display: grid;
-    grid-template-columns: 1fr 512px 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
     grid-gap: 16px;
 }
 
-.gHeader {
+#gHeader {
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
     background: #fee;
 }
 
-.gChangeRange {
+#gChangeRate {
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 2;
     grid-row-end: 3;
-    align-self: center;
-    background: #dfd;
 }
 
-.gGenerate {
+#gUserText {
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
-    align-self: center;
-    background: #dfd;
 }
 
-.gUserText {
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 2;
-    grid-row-end: 3;
-    align-self: center;
-    background: #dfd;
-}
-
-.gHeader, .gChangeRange, .gGenerate, .gUserText {
-    text-align: center;
-}
-.gManifesto {
-    grid-column-start: 2;
+#gGenerate {
+    grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 3;
     grid-row-end: 4;
 }
 
-.gFooter {
+#gManifesto {
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 3;
     grid-row-start: 4;
     grid-row-end: 5;
-    background: #ccf;
+}
+
+#gAgain {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 5;
+    grid-row-end: 6;
+}
+
+#gHeader, #gChangeRate, #gGenerate, #gUserText, #gAgain {
+    text-align: center;
+}
+
+#gChangeRate, #gUserText, #gGenerate, #gAgain {
+    align-self: center;
+    background: #dfd;
 }

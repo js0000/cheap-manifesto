@@ -4,7 +4,7 @@
 function knuthShuffle(a) {
     var c = a.length;
     while (c > 0) {
-        var idx = Math.floor( Math.random() * c );
+        var idx = Math.floor(Math.random() * c);
         c--;
 
         var tmp = a[c];
@@ -42,8 +42,12 @@ __ART__ IS __CHEAP__!<br />
 __HURRAH__!<br />
 </p>
 
-<p id="manifestoFooter">derived from: <a href="http://breadandpuppet.org/" target="_blank">Bread &amp; Puppet</a>
-    Glover, Vermont, 1984<br><span id="generatedDate">__TIMESTAMP__</span></p>`;
+<p id="manifestoFooter">
+    derived from:
+    <a href="http://breadandpuppet.org/" target="_blank">Bread &amp; Puppet</a>
+    Glover, Vermont, 1984<br>
+    <span id="generatedDate">__TIMESTAMP__</span>
+</p>`;
 
     // four element arrays like
     // [ original, similar, opposite, weird ]
@@ -225,17 +229,17 @@ __HURRAH__!<br />
     ];
 
     var i, sa, coin;
-    if( uT.length > 0 ) {
-        coin = Math.floor( Math.random()* userTextReplacements.length );
-        if( coin > 0 ) {
-            sa = knuthShuffle( userTextReplacements );
+    if(uT.length > 0) {
+        coin = Math.floor(Math.random()* userTextReplacements.length);
+        if(coin > 0) {
+            sa = knuthShuffle(userTextReplacements);
             // changeRate
-            var intCR = parseInt( cR );
+            var intCR = parseInt(cR);
             var numberReplacements = intCR + 1;
-            for( i = 0; i < numberReplacements; i++ ) {
+            for(i = 0; i < numberReplacements; i++) {
                 var k = sa[i];
-                for( var j = 0; j < coin; j++ ) {
-                    replacements[k].push( uT );
+                for(var j = 0; j < coin; j++) {
+                    replacements[k].push(uT);
                 }
             }
         }
@@ -243,40 +247,76 @@ __HURRAH__!<br />
 
     // do the replacements in the templateSrc
     var pattern, tmpSrc;
-    var replacementKeys = Object.keys( replacements );
-    for( i = 0; i < replacementKeys.length; i++ ) {
+    var replacementKeys = Object.keys(replacements);
+    for(i = 0; i < replacementKeys.length; i++) {
         var rawToken = replacementKeys[i];
         var token = '__' + rawToken.toUpperCase() + '__';
         // default is original
         var replacement = replacements[rawToken][0];
         var sides = cR * 2;
-        coin = Math.floor( Math.random() * sides );
-        if( coin > 0 ) {
-            sa = knuthShuffle( replacements[rawToken] );
-            var idx = Math.floor( Math.random() * replacements[rawToken].length );
+        coin = Math.floor(Math.random() * sides);
+        if(coin > 0) {
+            sa = knuthShuffle(replacements[rawToken]);
+            var idx = Math.floor(Math.random() * replacements[rawToken].length);
             replacement = sa[idx];
         }
         // update template
-        pattern = new RegExp( token, 'gm' );
-        tmpSrc = templateSrc.replace( pattern, replacement );
+        pattern = new RegExp(token, 'gm');
+        tmpSrc = templateSrc.replace(pattern, replacement);
         templateSrc = tmpSrc;
     }
 
     return templateSrc;
 }
 
+function displayManifesto() {
+    var displayDivs = [
+        'gManifesto',
+        'gAgain'
+    ];
+    for(var i = 0; i < displayDivs.length; i++) {
+        document.getElementById(displayDivs[i]).style.display = 'block';
+    }
+    var hideDivs = [
+        'gHeader',
+        'gChangeRate',
+        'gUserText',
+        'gGenerate',
+    ];
+    for(var i = 0; i < hideDivs.length; i++) {
+        document.getElementById(hideDivs[i]).style.display = 'none';
+    }
+}
+
 function clearPage() {
-    document.getElementById("manifesto").innerText = '';
+    document.getElementById("gManifesto").innerText = '';
     document.getElementById("errorText").innerText = '';
 }
 
 function resetPage() {
     clearPage();
-    document.getElementById("userText").value = '';
-    document.getElementById("changeRate").value = 2;
+    //document.getElementById("userText").value = '';
+    //document.getElementById("changeRate").value = 2;
+    var displayDivs = [
+        'gHeader',
+        'gChangeRate',
+        'gUserText',
+        'gGenerate',
+    ];
+    for(var i = 0; i < displayDivs.length; i++) {
+        document.getElementById(displayDivs[i]).style.display = 'block';
+    }
+
+    var hideDivs = [
+        'gManifesto',
+        'gAgain'
+    ];
+    for(var i = 0; i < hideDivs.length; i++) {
+        document.getElementById(hideDivs[i]).style.display = 'none';
+    }
 }
 
-function returnError( eM ) {
+function returnError(eM) {
     clearPage();
     document.getElementById("errorText").innerHTML = eM;
 }
@@ -284,36 +324,40 @@ function returnError( eM ) {
 function genManifesto() {
     clearPage();
     var rawUserText = document.getElementById("userText").value;
-    var singleWordPattern = new RegExp( '^\\w+$' );
-    var singleWord = singleWordPattern.test( rawUserText );
-    var spaceOnlyPattern = new RegExp( '^\\s*$' );
-    var spaceOnly = spaceOnlyPattern.test( rawUserText );
-    if( singleWord || spaceOnly ) {
+    var singleWordPattern = new RegExp('^\\w+$');
+    var singleWord = singleWordPattern.test(rawUserText);
+    var spaceOnlyPattern = new RegExp('^\\s*$');
+    var spaceOnly = spaceOnlyPattern.test(rawUserText);
+    if(singleWord || spaceOnly) {
         var userText = '';
-        if( ! spaceOnly ) {
+        if(! spaceOnly) {
             userText= rawUserText.toUpperCase();
         }
         var changeRate = document.getElementById("changeRate").value;
         var now = new Date();
         var timestamp = "generated: " + now.toISOString();
-        var m = populateTemplate( userText, changeRate, timestamp );
-        document.getElementById("manifesto").innerHTML = m;
+        var m = populateTemplate(userText, changeRate, timestamp);
+        document.getElementById("gManifesto").innerHTML = m;
+        displayManifesto();
     }
     else {
-        var errorMsg = 'invalid userText, ONLY alphanumerics allowed<br>"' + rawUserText + '"';
-        returnError( errorMsg );
+        resetPage();
+        var errorMsg = 'invalid userText, ONLY alpha-numeric characters allowed: "' + rawUserText + '"';
+        returnError(errorMsg);
     }
 }
 document.getElementById("bGenerate").onclick = genManifesto;
 
-function displaychangeRate() {
+function displayChangeRate() {
     var cR = document.getElementById("changeRate").value;
     document.getElementById("crDisplay").innerText = cR;
 }
-document.getElementById("changeRate").onchange = displaychangeRate;
+document.getElementById("changeRate").onchange = displayChangeRate;
 
 function nullSubmit() { return false; }
 document.getElementById("fUserText").onsubmit = nullSubmit;
 
+document.getElementById("bAgain").onclick = resetPage;
+
 resetPage();
-displaychangeRate();
+displayChangeRate();

@@ -10,20 +10,18 @@
 
     <body>
         <div id="gContainer">
-            <div class="gHeader">
+            <div id="gHeader">
                 <h1>cheap manifesto</h1>
             </div>
-            <div class="gChangeRange">
-                <form action="about:blank" id="fChangeRange">
+            <div id="gChangeRate">
+                <!-- form action="about:blank" id="fChangeRate" -->
+                <form action="about:blank">
                     <label for="changeRate">changeRate:</label>
                     <input id="changeRate" type="range" min="0" max="4" name="cR">
                     <span id="crDisplay"></span>
                 </form>
             </div>
-            <div class="gGenerate">
-                <button id="bGenerate" type="button">generate</button>
-            </div>
-            <div class="gUserText">
+            <div id="gUserText">
                 <form action="about:blank" id="fUserText">
                     <label for="userText">userText:</label>
                     <input id="userText" type="text" name="uT"><br>
@@ -33,8 +31,13 @@
                     <span id="errorText" class="eText"></span>
                 </form>
             </div>
-            <div id="manifesto" class="gManifesto"></div>
-            <div class="gFooter"><p>&nbsp;</p></div>
+            <div id="gGenerate">
+                <button id="bGenerate" type="button">generate</button>
+            </div>
+            <div id="gManifesto"></div>
+            <div id="gAgain">
+                <button id="bAgain" type="button">again!</button>
+            </div>
         </div>
         <script src="cm.js"></script>
     </body>
