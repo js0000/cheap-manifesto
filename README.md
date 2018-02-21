@@ -1,2 +1,2 @@
 # cheap-manifesto
-a cheap manifesto generator for game jam
+artificial intellivision for itch.io manifesto jam
