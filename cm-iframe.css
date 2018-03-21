@@ -1,0 +1,14 @@
+/* cm-iframe.css */
+
+div#itch {
+    margin: 64px;
+}
+
+div#itch h1 {
+    font-family: monospace;
+}
+
+iframe {
+    height: 256px;
+    width: 512px;
+}

@@ -11,7 +11,7 @@ body {
 input, button {
     vertical-align: middle;
     margin: 8px;
-    padding: 4px; 
+    padding: 4px;
     font-size: medium;
 }
 
@@ -33,6 +33,7 @@ button:active {
 
 h1 {
     font-family: 'Press Start 2P', cursive;
+    font-size: small;
 }
 
 label {
@@ -41,6 +42,7 @@ label {
 
 #gManifesto {
     font-family: 'Corben', cursive;
+    font-size: small;
     margin-top: -64px;
 }
 
